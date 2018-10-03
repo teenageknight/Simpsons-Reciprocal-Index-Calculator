@@ -32,24 +32,34 @@ def calculateIndex(totalOrganisms, numberSingleSpecies):
 
 # Main Function
 def main():
-    totalOrganisms = float(input('How many total organisms are there?\n'))
-    numberSingleSpecies = []
+    totalOrganisms = 0
+    numSpecies = int(input("How many total species were there?\n"))
+    speciesValues = []
 
-    print("\nPress q to quit\n")
-    done = False
-    while not done:
-        singleSpeciesNumber = input('How many organisms are of one species. (Press q to quit)\n')
+    for i in range(numSpecies):
+        temp = int(input("How many organisms were of species one?\n"))
+        speciesValues.append(temp)
 
-        if singleSpeciesNumber == 'q':
-            done = True
-            break
-        elif singleSpeciesNumber != 'q':
-            singleSpeciesNumber = int(singleSpeciesNumber)
-            numberSingleSpecies.append(singleSpeciesNumber)
+    for i in range(len(speciesValues)):
+        totalOrganisms += speciesValues[i]
 
+    D = calculateIndex(totalOrganisms, speciesValues)
+    print("The total number of organisms is {}".format(totalOrganisms))\
 
-    D = calculateIndex(totalOrganisms, numberSingleSpecies)
+    for i in range(len(speciesValues)):
+        print("Number of Species {0}: {1}\n".format(i+1, speciesValues[i]))
+
     print("The simpsons Reciprical index is {}".format(D))
 
 if __name__ == '__main__':
-    main()
+    decision = input("Do you want to calculate index (y/n)?\n")
+    done = False
+    while not done:
+        if decision == "y" or decision == "Y":
+            main()
+            decision = input("Do you want to calculate index (y/n)?\n")
+        elif decision == "n" or decision == "N":
+            done = True
+        else:
+            print("{} is not an awnser. Please awnser with y or n".format(decision))
+            decision = input("Do you want to calculate index (y/n)?\n")
